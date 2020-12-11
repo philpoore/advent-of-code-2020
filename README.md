@@ -14,8 +14,6 @@ Submission for Advent of Code 2020 written in cpp.
 - [Day 10](./day10)
 - [Day 11](./day11)
 
-## Common Lib
-
 ## Compiling
 ```bash
 # Compile all days, run in root folder
