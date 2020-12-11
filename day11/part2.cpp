@@ -1,17 +1,9 @@
 /*
 https://adventofcode.com/2020/day/11
 */
-#include <iostream>
-#include <string>
-#include <vector>
+#include "../common.hpp"
 
-using namespace std;
-
-enum {
-    FLOOR,
-    SEAT,
-    PERSON,
-};
+enum { FLOOR, SEAT, PERSON };
 
 int num_visible_occupied(vector<vector<int>> &layout, int height, int width, int x, int y) {
     int occupied = 0;
@@ -82,8 +74,8 @@ int main() {
     }
     int height = layout.size();
     int width = layout[0].size();
-    cout << "rows: " << height << "\n";
-    cout << "cols: " << width << "\n";
+    debug(height);
+    debug(width);
     display_layout(layout);
 
     // Simulate rules of layout.
@@ -116,5 +108,5 @@ int main() {
 
     // display final layout
     display_layout(layout);
-    cout << "total_occupied: " << total_occupied << "\n";
+    debug(total_occupied);
 }

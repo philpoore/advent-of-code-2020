@@ -73,43 +73,11 @@ passports are valid?
 
 */
 
-#include <iostream>
-#include <string>
-#include <map>
-#include <vector>
-#include <algorithm>
+#include "../common.hpp"
 
-using namespace std;
+vector<string> allowed_keys = { "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid" };
 
-vector<string> allowed_keys = {
-    "byr",
-    "iyr",
-    "eyr",
-    "hgt",
-    "hcl",
-    "ecl",
-    "pid",
-    "cid",
-};
-
-vector<string> alllowed_eye_colors = {
-    "amb", "blu", "brn", "gry", "grn", "hzl", "oth"
-};
-
-vector<string> split(string input, char delim) {
-    vector<string> output;
-    string curr;
-    for (int i = 0; i < input.size(); i++) {
-        if (input[i] == delim) {
-            output.push_back(curr);
-            curr = "";
-        } else {
-            curr += input[i];
-        }
-    }
-    if (curr != "") output.push_back(curr);
-    return output;
-}
+vector<string> alllowed_eye_colors = { "amb", "blu", "brn", "gry", "grn", "hzl", "oth" };
 
 pair<string, string> process_part(string &part) {
     auto bits = split(part, ':');
@@ -123,18 +91,25 @@ bool is_valid_passport(map<string, string> &passport) {
     }
     if (size == 8 || !passport.count("cid")) {
         // Validate data
+        // Byr
         if (passport["byr"].size() != 4) return false;
         if (passport["byr"] < "1920" || passport["byr"] > "2002") {
             return false;
         }
+
+        // Iyr
         if (passport["iyr"].size() != 4) return false;
         if (passport["iyr"] < "2010" || passport["iyr"] > "2020") {
             return false;
         }
+
+        // Eyr
         if (passport["eyr"].size() != 4) return false;
         if (passport["eyr"] < "2020" || passport["eyr"] > "2030") {
             return false;
         }
+
+        // Hgt
         if (passport["hgt"].size() <= 2) {
             return false;
         }
@@ -147,6 +122,8 @@ bool is_valid_passport(map<string, string> &passport) {
         } else {
             return false;
         }
+
+        // Hcl
         if (passport["hcl"].size() != 7) return false;
         if (passport["hcl"][0] != '#') return false;
         for (int i = 1; i < 7; i++) {
@@ -156,6 +133,7 @@ bool is_valid_passport(map<string, string> &passport) {
             }
         }
         
+        // Ecl
         auto it = find(alllowed_eye_colors.begin(), alllowed_eye_colors.end(), passport["ecl"]);
         if (it == alllowed_eye_colors.end()) return false;
         
@@ -182,7 +160,7 @@ int main() {
         while(true) {
             getline(cin, line);
             if (line == "") break;
-            cout << "line: " << line << "\n";
+            debug(line);
 
             vector<string> parts = split(line, ' ');
             for (auto& part : parts) {
@@ -200,6 +178,7 @@ int main() {
         if (valid) count_valid++;
         cout << "passport : " << (valid ? "valid" : "not valid") << "\n\n";
     }
-    cout << "valid count: " << count_valid << "\n";
-    cout << "total count: " << count_total << "\n";
+    
+    debug(count_valid);
+    debug(count_total);
 }

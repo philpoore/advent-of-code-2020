@@ -1,12 +1,7 @@
 /*
 https://adventofcode.com/2020/day/8
 */
-#include <iostream>
-#include <string>
-#include <vector>
-#include <set>
-
-using namespace std;
+#include "../common.hpp"
 
 int main() {
     vector<pair<string, string>> program;
@@ -16,8 +11,8 @@ int main() {
         cin >> cmd >> arg;
         program.push_back(make_pair(cmd, arg));
     }
-
-    cout << "program length: " << program.size() << "\n";
+    int programSize = program.size();
+    debug(programSize);
 
     int pc = 0;
     int acc = 0;
@@ -41,5 +36,5 @@ int main() {
         }
         pc++;
     }
-    cout << "acc: " << acc << "\n";
+    debug(acc);
 }

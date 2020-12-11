@@ -1,17 +1,11 @@
 /*
 https://adventofcode.com/2020/day/11
 */
-#include <iostream>
-#include <string>
-#include <vector>
+#include "../common.hpp"
 
 using namespace std;
 
-enum {
-    FLOOR,
-    SEAT,
-    PERSON,
-};
+enum { FLOOR, SEAT, PERSON };
 
 int num_occupied(vector<vector<int>> &layout, int height, int width, int x, int y) {
     int occupied = 0;
@@ -73,11 +67,12 @@ int main() {
     }
     int height = layout.size();
     int width = layout[0].size();
-    cout << "rows: " << height << "\n";
-    cout << "cols: " << width << "\n";
+    debug(height);
+    debug(width);
+
     display_layout(layout);
 
-    // Simulate evolution.
+    // Simulate evolution of rules.
     bool somethingChanged = false;
     int total_occupied = 0;
     do {
@@ -105,21 +100,7 @@ int main() {
         layout = layout_copy;
     } while(somethingChanged);
 
+    // Display final layout.
     display_layout(layout);
-    cout << "total_occupied: " << total_occupied << "\n";
-    cout << "done\n";
+    debug(total_occupied);
 }
-/*
-
-#.#L.L#.##
-#LLL#LL.L#
-L.#.L..#..
-#L##.##.L#
-#.#L.LL.LL
-#.#L#L#.##
-..L.L.....
-#L#L##L#L#
-#.LLLLLL.L
-#.#L#L#.##
-
-*/

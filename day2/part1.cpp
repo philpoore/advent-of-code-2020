@@ -34,10 +34,8 @@ In the above example, 2 passwords are valid. The middle password, cdefg,
 How many passwords are valid according to their policies?
 
 */
-#include <iostream>
-#include <vector>
+#include "../common.hpp"
 
-using namespace std;
 
 bool validPassword(int min, int max, int c, string &password) {
     int count = 0;

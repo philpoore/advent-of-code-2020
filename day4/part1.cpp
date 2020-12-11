@@ -63,39 +63,9 @@ Count the number of valid passports - those that have all required fields.
 Treat cid as optional. In your batch file, how many passports are valid?
 
 */
-#include <iostream>
-#include <string>
-#include <map>
-#include <vector>
-#include <algorithm>
+#include "../common.hpp"
 
-using namespace std;
-
-vector<string> allowed_keys = {
-    "byr",
-    "iyr",
-    "eyr",
-    "hgt",
-    "hcl",
-    "ecl",
-    "pid",
-    "cid",
-};
-
-vector<string> split(string input, char delim) {
-    vector<string> output;
-    string curr;
-    for (int i = 0; i < input.size(); i++) {
-        if (input[i] == delim) {
-            output.push_back(curr);
-            curr = "";
-        } else {
-            curr += input[i];
-        }
-    }
-    if (curr != "") output.push_back(curr);
-    return output;
-}
+vector<string> allowed_keys = { "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid" };
 
 pair<string, string> process_part(string &part) {
     auto bits = split(part, ':');
@@ -126,12 +96,13 @@ int main() {
         while(true) {
             getline(cin, line);
             if (line == "") break;
-            cout << "line: " << line << "\n";
+            debug(line);
 
             vector<string> parts = split(line, ' ');
             for (auto& part : parts) {
                 pair<string, string> res = process_part(part);
-                if (find(allowed_keys.begin(), allowed_keys.end(), res.first) == allowed_keys.end()) {
+                auto it = find(allowed_keys.begin(), allowed_keys.end(), res.first);
+                if (it == allowed_keys.end()) {
                     cout << "Not allowed key: " << res.first << "\n";
                     exit(1);
                 }
@@ -144,6 +115,6 @@ int main() {
         if (valid) count_valid++;
         cout << "passport : " << (valid ? "valid" : "not valid") << "\n\n";
     }
-    cout << "valid count: " << count_valid << "\n";
-    cout << "total count: " << count_total << "\n";
+    debug(count_valid);
+    debug(count_total);
 }

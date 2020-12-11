@@ -66,10 +66,7 @@ you to encounter 7 trees.
 Starting at the top-left corner of your map and following a slope 
 of right 3 and down 1, how many trees would you encounter?
 */
-#include <iostream>
-#include <vector>
-
-using namespace std;
+#include "../common.hpp"
 
 int main() {
     vector<vector<bool>> map;
@@ -89,8 +86,8 @@ int main() {
 
     int height = map.size();
     int width = map[0].size();
-    cout << "map width : " << width << "\n";
-    cout << "map height: " << height << "\n";
+    debug(width);
+    debug(height);
     int x = 0;
     int y = 0;
     int countTrees = 0;
@@ -102,12 +99,9 @@ int main() {
         if (x >= width) x -= width;
 
         if (map[y][x]) {
-            cout << "X - hit  tree at " << x << " " << y << "\n";
             countTrees++;
-        } else {
-            cout << "O - miss tree at " << x << " " << y << "\n";
         }
     }
     
-    cout << countTrees << "\n";
+    debug(countTrees);
 }

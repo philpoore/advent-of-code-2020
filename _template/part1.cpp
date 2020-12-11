@@ -1,11 +1,7 @@
 /*
 
 */
-#include <iostream>
-#include <string>
-#include <vector>
-
-using namespace std;
+#include "../common.hpp"
 
 int main() {
     

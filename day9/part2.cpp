@@ -1,26 +1,13 @@
 /*
-
+https://adventofcode.com/2020/day/9
 */
-#include <iostream>
-#include <string>
-#include <vector>
-#include <algorithm>
+#include "../common.hpp"
 
-using namespace std;
-
-typedef long long ll;
-ll target = 3199139634;
-
-// ll target = 127;
+// ll target = 127; // For test
+ll target = 3199139634; // From part1
 
 int main() {
-    vector<ll> input;
-    while(!cin.eof()) {
-        string line;
-        getline(cin, line);
-        if (line == "") break;
-        input.push_back(stoll(line));
-    }
+    vector<ll> input = get_input<ll>();
 
     vector<ll> prefix_sum(input.size());
     ll sum = 0;
@@ -53,22 +40,22 @@ int main() {
         return 1;
     }
     
+    // Calculate min and max
     ll min = INT64_MAX;
     ll max = INT64_MIN;
     {
         for (int k = i; k <= j; k++) {
-            cout << "input[" << k << "] = " << input[k] << "\n";
-
+            // debug(input[k]);
             if (input[k] > max) max = input[k];
             if (input[k] < min) min = input[k];
         }
-        cout << "min: " << min << "\n";
-        cout << "max: " << max << "\n";
+        debug(min);
+        debug(max);
     }
     
     {
-        ll sum = max + min;
-        cout << "sum: " << sum << "\n";
+        ll answer = max + min;
+        debug(answer);
     }
     
 }

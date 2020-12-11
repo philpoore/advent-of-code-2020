@@ -1,11 +1,7 @@
 /*
 https://adventofcode.com/2020/day/5
 */
-#include <iostream>
-#include <string>
-#include <vector>
-
-using namespace std;
+#include "../common.hpp"
 
 struct Pos {
     int row;
@@ -43,10 +39,9 @@ int main() {
             << " col=" << pos.col 
             << " seatID:" << seatID << "\n";
         if (seatID > maxSeatID) {
-            cout << "ticket: " << line << "\n";
             maxSeatID = seatID;
         }
     }
-    cout << "max seat id: " << maxSeatID << "\n";
+    debug(maxSeatID);
     return 0;
 }

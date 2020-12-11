@@ -1,9 +1,7 @@
 /*
 https://adventofcode.com/2020/day/6
 */
-#include <iostream>
-#include <string>
-#include <set>
+#include "../common.hpp"
 
 using namespace std;
 int main() {
@@ -17,26 +15,27 @@ int main() {
             getline(cin, line);
             if (line == "") break;
             if (first) {
-                for (char& c : line) {
-                    s.insert(c);
+                foreach (line) {
+                    s.insert(it);
                 }
             } else {
                 // Insert into second set
                 set<char> s2, s3;
-                for (char& c : line) {
-                    s2.insert(c);
+                foreach(line) {
+                    s2.insert(it);
                 }
 
-                for (auto& a : s) {
-                    if (s2.count(a)) {
-                        s3.insert(a);
+                foreach(s) {
+                    if (s2.count(it)) {
+                        s3.insert(it);
                     }
                 }
+
                 s = s3;
             }
             first = false;
         }
         total += s.size();
     }
-    cout << total << "\n";
+    debug(total);
 }

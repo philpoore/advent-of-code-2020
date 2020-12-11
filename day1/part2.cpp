@@ -13,35 +13,24 @@ In your expense report, what is the product of the three entries
 that sum to 2020?
 */
 
-#include <iostream>
-#include <vector>
-#include <set>
-
-using namespace std;
-
+#include "../common.hpp"
 
 int main() {
-    vector<int> numbers;
-    while (true) {
-        int num;
-        cin >> num;
-        if (cin.eof()) break;
-        numbers.push_back(num);
-    }
-
+    vector<int> numbers = get_input<int>();
     set<int> s;
-    // Insert all numbers into set
-    for (auto& num : numbers) {
-        s.insert(num);
-    }
+
+    foreach (numbers)
+        s.insert(it);
     
-    // For each pair, check if other is in set
     for (int i = 0; i < numbers.size(); i++) {
         for (int j = i + 1; j < numbers.size(); j++) {
-            int other = 2020 - numbers[i] - numbers[j];
-            if (s.count(other)) {
-                cout << other << " " << numbers[i] << " " << numbers[j] << "\n";
-                cout << other * numbers[i] * numbers[j] << "\n";
+            int a = numbers[i];
+            int b = numbers[j];
+            int c = 2020 - a - b;
+            if (s.count(c)) {
+                int answer = a * b * c;
+                cout << a << " " << b << " " << c << "\n";
+                debug(answer);
                 return 0;
             }
         }

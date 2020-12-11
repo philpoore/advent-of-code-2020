@@ -1,13 +1,7 @@
 /*
 https://adventofcode.com/2020/day/8
 */
-#include <iostream>
-#include <string>
-#include <vector>
-#include <set>
-
-using namespace std;
-
+#include "../common.hpp"
     
 vector<pair<string, string>> program;
 int res_acc = -1;
@@ -23,7 +17,6 @@ bool solve(int pc, int acc, bool changed, int changedPC, set<int> visited, vecto
             return true;
         }
 
-
         auto curr = program[pc];
         if (visited.count(pc)) {
             return false;
@@ -34,7 +27,8 @@ bool solve(int pc, int acc, bool changed, int changedPC, set<int> visited, vecto
         string cmd = curr.first;
         string arg = curr.second;
         if (cmd == "nop") {
-            // try jmp
+            // If we've not changed an instruction so far
+            // try solving by treating this nop as a jmp instruction
             if (!changed && solve(pc + stoi(arg), acc, true, pc, visited, order)) {
                 return true;
             }
@@ -43,7 +37,8 @@ bool solve(int pc, int acc, bool changed, int changedPC, set<int> visited, vecto
         } else if (cmd == "acc") {
             acc += stoi(arg);
         } else if (cmd == "jmp") {
-            // try nop
+            // If we've not changed an instruction so far
+            // try solving by treating this jmp as a nop instruction
             if (!changed && solve(pc + 1, acc, true, pc, visited, order)) {
                 return true;
             }
@@ -62,7 +57,8 @@ int main() {
         program.push_back(make_pair(cmd, arg));
     }
 
-    cout << "program length: " << program.size() << "\n";
+    int programSize = program.size();
+    debug(programSize);
 
     int pc = 0;
     int acc = 0;

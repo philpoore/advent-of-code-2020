@@ -1,12 +1,7 @@
 /*
 https://adventofcode.com/2020/day/5
 */
-#include <iostream>
-#include <string>
-#include <vector>
-#include <map>
-
-using namespace std;
+#include "../common.hpp"
 
 struct Pos {
     int row;
@@ -39,17 +34,13 @@ int main() {
         cin >> line;
         Pos pos = ticket_to_pos(line);
         int seatID = (pos.row * 8) + pos.col;
-        // cout << "ticket: " << line 
-        //     << " pos: row=" << pos.row 
-        //     << " col=" << pos.col 
-        //     << " seatID:" << seatID << "\n";
-
         seats[seatID] = true;
     }
     int last = -1;
     for (auto& seat : seats) {
         if (last != -1 && seat.first - last > 1) {
-            cout << "missing: " << last + 1 << "\n";
+            int missing = last + 1;
+            debug(missing);
         }
         last = seat.first;
     }

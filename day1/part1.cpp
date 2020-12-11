@@ -20,31 +20,23 @@ answer is 514579.
 Of course, your expense report is much larger. Find the two entries 
 that sum to 2020; what do you get if you multiply them together?
 */
-#include <iostream>
-#include <vector>
-#include <set>
-
-using namespace std;
+#include "../common.hpp"
 
 
 int main() {
-    vector<int> numbers;
-    while (true) {
-        int num;
-        cin >> num;
-        if (cin.eof()) break;
-        numbers.push_back(num);
-    }
-
+    vector<int> numbers = get_input<int>();
     set<int> s;
-    for (auto& num : numbers) {
-        int other = 2020 - num;
+
+    foreach (numbers) {
+        int other = 2020 - it;
         if (s.count(other)) {
-            cout << other << " " << num << "\n";
-            cout << other * num << "\n";
+            int answer = other * it;
+            cout << other << " " << it << "\n";
+
+            debug(answer);
             return 0;
         }
-        s.insert(num);
+        s.insert(it);
     }
     cout << "No match found\n";
     return 0;

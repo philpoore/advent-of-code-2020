@@ -23,10 +23,7 @@ Given the same example list from above:
 How many passwords are valid according to the new interpretation of the policies?
 
 */
-#include <iostream>
-#include <vector>
-
-using namespace std;
+#include "../common.hpp"
 
 bool validPassword(int i, int j, int c, string &password) {
     return (password[i - 1] == c) ^ (password[j - 1] == c);
@@ -49,7 +46,7 @@ int main() {
     }
 
     // Display result
-    cout << numValid << "\n";
+    debug(numValid);
 
     return 0;
 }

@@ -18,10 +18,7 @@ respectively; multiplied together, these produce the answer 336.
 What do you get if you multiply together the number of trees encountered on 
 each of the listed slopes?
 */
-#include <iostream>
-#include <vector>
-
-using namespace std;
+#include "../common.hpp"
 
 typedef vector<vector<bool>> Map;
 
@@ -61,15 +58,20 @@ int main() {
 
     int height = map.size();
     int width = map[0].size();
-    cout << "map width : " << width << "\n";
-    cout << "map height: " << height << "\n";
+    debug(width);
+    debug(height);
     
-    int a = treesHit(map, width, height, 1, 1);
-    int b = treesHit(map, width, height, 3, 1);
-    int c = treesHit(map, width, height, 5, 1);
-    int d = treesHit(map, width, height, 7, 1);
-    int e = treesHit(map, width, height, 1, 2);
-    cout << a << " " << b << " " << c << " " << d << " " << e << "\n";
-    long long answer = (long long)a * b * c * d * e;
-    cout << answer << "\n";
+    int dirs[5][2] = {
+        {1, 1},
+        {3, 1},
+        {5, 1},
+        {7, 1},
+        {1, 2}
+    };
+
+    ll answer = 1;
+    for (int i = 0; i < 5; i++) {
+        answer *= treesHit(map, width, height, dirs[i][0], dirs[i][1]);
+    }
+    debug(answer);
 }

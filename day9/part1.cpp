@@ -1,14 +1,7 @@
 /*
-
+https://adventofcode.com/2020/day/9
 */
-#include <iostream>
-#include <string>
-#include <vector>
-#include <set>
-
-using namespace std;
-
-typedef long long ll;
+#include "../common.hpp"
 
 bool is_valid(vector<ll> v, ll target) {
     set<ll> s;
@@ -23,13 +16,7 @@ bool is_valid(vector<ll> v, ll target) {
 
 int main() {
     int preamble = 25;
-    vector<ll> input;
-    while(!cin.eof()) {
-        string line;
-        getline(cin, line);
-        if (line == "") break;
-        input.push_back(stoll(line));
-    }
+    vector<ll> input = get_input<ll>();
 
     vector<ll> v;
     for (int i = 0; i < preamble; i++) {

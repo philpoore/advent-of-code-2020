@@ -1,25 +1,16 @@
 /*
 https://adventofcode.com/2020/day/7
 */
-#include <iostream>
-#include <string>
-#include <vector>
-#include <regex>
-#include <set>
+#include "../common.hpp"
 
-using namespace std;
-
-map<string, bool> nodes;
 vector<pair<string, string>> edges;
 
 void parse_line(string line) {
-    // cout << "line: " << line << "\n";
     const std::regex base_regex("([a-z ]+) bags contain ");
     std::smatch base_match;
     string color;
     if (regex_search(line, base_match, base_regex)) {
         color = base_match[1].str();
-        // cout << "Color: " << color << "\n";
     } else {
         return;
     }
@@ -28,11 +19,9 @@ void parse_line(string line) {
         return;
     }
 
-    // const std::regex base_regex2("([0-9]+) ([a-z ]+) bag");
     const std::regex base_regex2("[0-9]+ ([a-z ]+) bags?");
     std::smatch base_match2;
     while (std::regex_search(line, base_match2, base_regex2)) {
-        // std::cout << base_match2[1] << std::endl;
         edges.push_back(make_pair(base_match2[1], color));
         line = base_match2.suffix().str();
     }
@@ -45,15 +34,16 @@ int main() {
         getline(cin, line);
         parse_line(line);
     }
+    int numEdges = edges.size();
+    debug(numEdges);
 
-    cout << "number of edges: " << edges.size() << "\n";
 #if 0
+    // Display edges
     for (auto& e : edges) {
         cout << e.first << " -> " << e.second << "\n";
     }
     return 0;
 #endif
-
 
     // bfs to find all downstream nodes, count as we go
     stack<string> s;
@@ -78,6 +68,6 @@ int main() {
             }
         }
     }
-    cout << "count: " << count << "\n";
+    debug(count);
     return 0;
 }

@@ -1,31 +1,15 @@
 /*
 https://adventofcode.com/2020/day/10
 */
-#include <iostream>
-#include <string>
-#include <vector>
-#include <set>
-#include <map>
-#include <algorithm>
-
-using namespace std;
-
-typedef long long ll;
+#include "../common.hpp"
 
 map<ll, ll> cache;
 
 ll count_ways(const vector<ll> &v, const set<ll> &s, ll max, ll i) {
     if (i == max) return 1;
-    if (i > max) {
-        return 0;
-    }
-    if (i != 0) {
-        if (!s.count(i)) {
-            return 0;
-        }
-    }
+    if (i > max) return 0;
+    if (i != 0 && !s.count(i)) return 0;
     if (cache.count(i)) return cache[i];
-    
     
     ll res = count_ways(v, s, max, i + 1)
         + count_ways(v, s, max, i + 2)
@@ -36,23 +20,22 @@ ll count_ways(const vector<ll> &v, const set<ll> &s, ll max, ll i) {
 }
 
 int main() {
-    vector<ll> input;
+    vector<ll> input = get_input<ll>();
+
+    // Create set of elements.
     set<ll> s;
-    while(!cin.eof()) {
-        ll a;
-        cin >> a;
-        s.insert(a);
-        input.push_back(a);
-    }
+    foreach (input)
+        s.insert(it);
 
     sort(input.begin(), input.end());
+
     ll max = input.back();
 
-    for (auto a : input) {
-        cout << a << " ";
-    }
-    cout << "\n";
+#if 0
+    // Display sorted array.
+    for (auto a : input) cout << a << " "; cout << "\n";
+#endif
     
     ll num_ways = count_ways(input, s, max, 0);
-    cout << "num ways: " << num_ways << "\n";
+    debug(num_ways);
 }

@@ -1,11 +1,8 @@
 /*
 https://adventofcode.com/2020/day/6
 */
-#include <iostream>
-#include <string>
-#include <set>
+#include "../common.hpp"
 
-using namespace std;
 int main() {
     int total = 0;
     cin >> noskipws;
@@ -15,11 +12,11 @@ int main() {
         while(true) {
             getline(cin, line);
             if (line == "") break;
-            for (char& c : line) {
-                s.insert(c);
+            foreach(line) {
+                s.insert(it);
             }
         }
         total += s.size();
     }
-    cout << total << "\n";
+    debug(total);
 }
