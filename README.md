@@ -14,6 +14,8 @@ Submission for Advent of Code 2020 written in cpp.
 - [Day 10](./day10)
 - [Day 11](./day11)
 - [Day 11](./day11)
+- [Day 12](./day12)
+- [Day 13](./day13)
 
 ## Compiling
 ```bash
