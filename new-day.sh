@@ -4,4 +4,4 @@ day=${1}
 
 cp -r _template day${day}
 
-./get-input ${day}
+./get-input.sh ${day}
