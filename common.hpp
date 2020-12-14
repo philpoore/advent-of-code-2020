@@ -15,6 +15,7 @@ using namespace std;
 typedef long long ll;
 
 #define debug(a) std::cout << #a << ": " << a << "\n";
+#define debugv(a) for (auto& it: a) std::cout << ": " << it << "\n";
 #define foreach(arr) for (auto& it : arr)
 
 #define FOR(a, b, c) for (int a = b; a <= c; a++)
